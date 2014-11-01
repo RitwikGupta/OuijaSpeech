@@ -9,7 +9,7 @@ import time
 qu = sys.stdin.readlines()[0].strip()
 
 if(qu == "-1"):
-    print "What?"
+    response = "&"
 else:
     cb1 = cleverbot.Cleverbot()
 
@@ -24,8 +24,7 @@ else:
 
     #Make all spaces periods
     response = response.replace(" ", ".")
-    response = response.lower()
-
+    response = response.lower() + "&"
 
 ser = serial.Serial('/dev/tty.usbmodem1421', 57600)
 
