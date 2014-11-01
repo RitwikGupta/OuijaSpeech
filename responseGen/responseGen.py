@@ -8,7 +8,7 @@ qu = sys.stdin.readlines()
 cb1 = cleverbot.Cleverbot()
 
 response = cb1.ask(qu)
-if response[0] == "*":
+while response[0] == "*":
   response = cb1.ask(qu)
 
 print response
