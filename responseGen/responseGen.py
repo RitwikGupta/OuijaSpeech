@@ -19,13 +19,12 @@ else:
     for c in string.punctuation:
         response = response.replace(c, "")
 
+    while (response[0] == "*" or response.find("app") != -1 or response.find("clever") != -1 or response.find("bot") != -1 or response.find("com") != -1):
+      response = cb1.ask(qu)
+
     #Make all spaces periods
     response = response.replace(" ", ".")
-
-    while response[0] == "*":
-      response = cb1.ask(qu)
-    response = response.lower()  
-    print response
+    response = response.lower()
 
 
 ser = serial.Serial('/dev/tty.usbmodem1421', 57600)
