@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import speech_recognition as sr
 import time
 r = sr.Recognizer()
@@ -6,7 +8,7 @@ start = end = time.time()
 # while True:
 with sr.Microphone() as source:
     r.energy_threshold = 100
-    audio = r.listen(source, timeout = .5)
+    audio = r.listen(source, timeout = 1)
 
 end = time.time()
 
