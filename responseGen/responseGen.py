@@ -3,6 +3,8 @@
 import cleverbot
 import sys
 import string
+import serial
+import time
 
 qu = sys.stdin.readlines()[0].strip()
 
@@ -22,5 +24,15 @@ else:
 
     while response[0] == "*":
       response = cb1.ask(qu)
-
+    response = response.lower()  
     print response
+
+
+ser = serial.Serial('/dev/tty.usbmodem1421', 57600)
+
+time.sleep(3)
+
+ser.write(response)
+
+#while True:
+	#print ser.readline()
