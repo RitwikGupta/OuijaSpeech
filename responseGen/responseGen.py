@@ -2,13 +2,25 @@
 
 import cleverbot
 import sys
+import string
 
-qu = sys.stdin.readlines()
+qu = sys.stdin.readlines()[0].strip()
 
-cb1 = cleverbot.Cleverbot()
+if(qu == "-1"):
+    print "What?"
+else:
+    cb1 = cleverbot.Cleverbot()
 
-response = cb1.ask(qu)
-while response[0] == "*":
-  response = cb1.ask(qu)
+    response = cb1.ask(qu)
 
-print response
+    #Replace all punctuation with blanks
+    for c in string.punctuation:
+        response = response.replace(c, "")
+
+    #Make all spaces periods
+    response = response.replace(" ", ".")
+
+    while response[0] == "*":
+      response = cb1.ask(qu)
+
+    print response
