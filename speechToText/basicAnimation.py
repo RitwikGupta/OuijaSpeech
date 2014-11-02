@@ -11,7 +11,7 @@
 # 0.5: new, improved timerFired design (with separate timerFired thread)
 # 0.4: added canvas.data Struct to wrapped canvas and basicAnimationDemo2.py
 # 0.4: no hang when canvas methods called without getEvent
-# 0.4: copy parameters on wrapped canvas calls to avoid destructive changes afterwards 
+# 0.4: copy parameters on wrapped canvas calls to avoid destructive changes afterwards
 # 0.3: better error message on canvas.fn error
 
 ################################################
@@ -86,7 +86,7 @@ class BasicAnimationRunner(object):
             self.thread.join()
 
     def __init__(self, appFn, width=300, height=300, **kwargs):
-        self.runningInIDLE =  ("idlelib" in sys.modules)    
+        self.runningInIDLE =  ("idlelib" in sys.modules)
         self.width = width
         self.height = height
         self.drawingQueue = Queue()
@@ -116,6 +116,7 @@ class BasicAnimationRunner(object):
         self.thread = Thread(target=lambda : appFn(self, self.wrappedCanvas, **kwargs))
         self.thread.daemon = True
         self.thread.start()
+        self.root.title("OuijaBot")
         # and then run the mainloop in this thread
         self.root.mainloop()
 

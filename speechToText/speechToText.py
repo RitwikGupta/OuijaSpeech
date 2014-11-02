@@ -3,6 +3,7 @@ from Tkinter import *
 from basicAnimationClass import BasicAnimationClass
 import time
 import math
+import subprocess
 
 class speechToText(BasicAnimationClass):
     def __init__(self, width=800, height=600):
@@ -12,7 +13,7 @@ class speechToText(BasicAnimationClass):
         self.cy = self.height/2
         self.radius = 40
         super(speechToText, self).__init__(canvasWidth, canvasHeight)
-        
+
     def redrawAll(self):
         cx, cy, r = self.cx, self.cy, self.radius
         self.canvas.delete(ALL)
@@ -20,9 +21,11 @@ class speechToText(BasicAnimationClass):
             outlineColor = "red"
             self.canvas.create_oval(cx-(r/3), cy-(r/3), cx+(r/3), cy+(r/3), fill=outlineColor)
             self.canvas.create_text(cx, cy/2, text="Recording...", fill=outlineColor, font="Arial 20 bold")
+            self.canvas.create_text(cx, cy/2 + 23, text="(stops automatically)", fill=outlineColor, font="Arial 15")
         else:
             outlineColor = "white"
-            self.canvas.create_polygon(cx-(r/3), cy-(r/3), cx-(r/3), cy+(r/3), cx+(r/3), cy, fill=outlineColor)
+            self.canvas.create_text(cx, cy/2, text="Click the button the start recording", fill=outlineColor, font="Arial 20 bold")
+            self.canvas.create_oval(cx-(r/3), cy-(r/3), cx+(r/3), cy+(r/3), fill=outlineColor)
 
         self.canvas.create_oval(cx-r, cy-r, cx+r, cy+r, width=4, fill=None, outline=outlineColor)
 
@@ -46,10 +49,10 @@ class speechToText(BasicAnimationClass):
             self.redrawAll()
 
             try:
-                print r.recognize(audio, fuckedUp)
+                subprocess.call(["../responseGen/responseGen.py", str(r.recognize(audio, fuckedUp))])
 
             except LookupError:
-                print "-1"
+                subprocess.call(["../responseGen/responseGen.py", "-1"])
 
     def initAnimation(self):
         self.isRecording = False
