@@ -1,0 +1,26 @@
+Rajat, Mehndiratta, rajatmehndiratta@cmu.edu
+Ritwik, Gupta, rig18@pitt.edu
+Michael, Li, mbli@uwaterloo.ca
+Harris, Christiansen, harrischristiansen@mac.com
+
+OuijaBot
+
+An Ouija board that actually works.
+
+Speech-controlled artificial intelligence-powered Ouija board with output presented on an actual surface.
+
+We use the Google Speech-to-Text API to generate text from speech (controlled with a graphic interface), Cleverbot to generate responses, Serial to communicate to the Galileo, and map characters to positions on the board. 
+
+We also have some Easter eggs built in- like using Flask to respond to Yo's with a Yo from beyond the grave. *spooky music plays*
+
+servos, audio
+
+Arduino
+
+Servos: The hardest part was getting movement to work. Initially, we set up a system where we had two rubber bands (one horizontal, one vertical) where a servo would tug a magnet down while another would release and pull it sideways. This led to some issues with slipping and getting stuck, so we shifted a system with fixed rotation servos controlling a laser.
+
+Since this project was not planned in advance, building the project with just our available resources was also a major challenge. Before we could resurrect voices from beyond the grave, we first had to resurrect a dead board.
+
+Our project brings machine learning and speech-to-text to the physical (or spirit) world.
+
+Most of effort was spent on making the user experience effortless, simple, and seamless while also giving the user control.
