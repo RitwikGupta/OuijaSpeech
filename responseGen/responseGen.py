@@ -54,7 +54,7 @@ def mainFunction():
             respo = respon
             que = qu
         user = username
-        conversation = str(user) + "said: " + str(que) + " <br>" + "Bot responded: " + str(respo) + " <br><hr>"
+        conversation = str(user) + " said: " + str(que) + " <br>" + "Bot responded: " + str(respo) + " <br><hr>"
         requestURL = "http://www.purduecs.com/write.php?username=" + str(user) + "&conversation=" + str(conversation)
         r = requests.get(requestURL)
 

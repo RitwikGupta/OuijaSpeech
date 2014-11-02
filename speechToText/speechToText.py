@@ -45,7 +45,7 @@ class speechToText(BasicAnimationClass):
             self.canvas.create_text(cx, cy/2, text="Checking for Yo's...", fill=outlineColor, font="Arial 20 bold")
         elif self.receivedAYo == False:
             outlineColor = "white"
-            self.canvas.create_text(cx, cy/2, text="Click the button the start recording", fill=outlineColor, font="Arial 20 bold")
+            self.canvas.create_text(cx, cy/2, text="Click the button to start recording", fill=outlineColor, font="Arial 20 bold")
             self.canvas.create_oval(cx-(r/3), cy-(r/3), cx+(r/3), cy+(r/3), fill=outlineColor)
 
         if self.receivedAYo == False:
@@ -99,7 +99,7 @@ class speechToText(BasicAnimationClass):
         r = sr.Recognizer()
 
         with sr.Microphone() as source:
-            r.energy_threshold = 100
+            r.energy_threshold = 150
             audio, fuckedUp = r.listen(source, timeout = 1)
             self.isRecording = False
             self.redrawAll()
