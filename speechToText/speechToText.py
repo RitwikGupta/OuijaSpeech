@@ -20,6 +20,12 @@ class speechToText(BasicAnimationClass):
         cx, cy, r = self.cx, self.cy, self.radius
         userString = ""
         self.canvas.delete(ALL)
+        if self.couldNotProcess:
+            if self.username != "None":
+                cnpString = "Could not recognize your input," + " " + self.username
+            else:
+                cnpString = "Could not recognize your audio input."
+            self.canvas.create_text(cx, cy + 2*r, text=cnpString, fill="white", font="Arial 14 bold")
         if self.username != "None":
             username = (self.username).replace("0710106541", "")
         else:
@@ -70,6 +76,7 @@ class speechToText(BasicAnimationClass):
             self.redrawAll()
 
     def onMousePressed(self, event):
+        self.couldNotProcess = False
         distance = math.sqrt((event.x - self.cx)**2 + (event.y - self.cy)**2)
         if distance <= self.radius:
             self.isRecording = True
@@ -100,8 +107,12 @@ class speechToText(BasicAnimationClass):
             try:
                 if fuckedUp == False:
                     subprocess.call(["../responseGen/responseGen.py", str(r.recognize(audio, fuckedUp)), self.username])
-
+                else:
+                    self.couldNotProcess = True
+                    self.redrawAll()
             except LookupError:
+                self.couldNotProcess = True
+                self.redrawAll()
                 try:
                     if self.username == "None":
                         subprocess.call(["../responseGen/responseGen.py", "-1", self.username])
@@ -116,6 +127,7 @@ class speechToText(BasicAnimationClass):
         self.checkingForYo = False
         self.receivedAYo = False
         self.username = "None"
+        self.couldNotProcess = False
 
 stt = speechToText(1366, 768)
 

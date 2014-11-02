@@ -65,6 +65,7 @@ response = mainFunction()
 print response
 
 ser = serial.Serial('/dev/ttyACM0', 57600)
+time.sleep(3)
 ser.write(response)
 
 #while True:
