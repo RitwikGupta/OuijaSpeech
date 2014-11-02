@@ -96,7 +96,6 @@ class speechToText(BasicAnimationClass):
             r.energy_threshold = 100
             audio, fuckedUp = r.listen(source, timeout = 1)
             self.isRecording = False
-            print "Stop recording"
             self.redrawAll()
 
             try:
