@@ -66,7 +66,7 @@ class speechToText(BasicAnimationClass):
                 subprocess.call(["../responseGen/responseGen.py", "-2", self.username])
             except:
                 pass
-            time.sleep(3)
+            if self.receivedAYo == True: time.sleep(1.8)
             self.receivedAYo = False
             self.redrawAll()
 
@@ -105,7 +105,7 @@ class speechToText(BasicAnimationClass):
 
     def initAnimation(self):
         self.isRecording = False
-        self.app.setTimerDelay(15000) # every fifteen seconds
+        self.app.setTimerDelay(10000) # every fifteen seconds
         self.checkingForYo = False
         self.receivedAYo = False
         self.username = "None"
