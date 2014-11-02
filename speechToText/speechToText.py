@@ -34,7 +34,7 @@ class speechToText(BasicAnimationClass):
             self.canvas.create_text(cx, cy/2, text="Recording...", fill=outlineColor, font="Arial 20 bold")
             self.canvas.create_text(cx, cy/2 + 23, text="(stops automatically)", fill=outlineColor, font="Arial 15")
         elif self.checkingForYo:
-            outlineColor = "red"
+            outlineColor = "purple"
             self.canvas.create_text(cx, cy, fill=outlineColor, text="Yo", font="Arial 20 bold")
             self.canvas.create_text(cx, cy/2, text="Checking for Yo's...", fill=outlineColor, font="Arial 20 bold")
         elif self.receivedAYo == False:
@@ -83,10 +83,11 @@ class speechToText(BasicAnimationClass):
     def onKeyPressed(self, event):
         keysym = event.keysym
         if keysym == "r" or keysym == "y" or keysym == "o":
-            if "0710106541" in self.username:
+            if self.username != None:
+                readURL = "http://www.purduecs.com/read.php?username=" + str(self.username)
+                user = str(self.username)
+                requests.post("http://api.justyo.co/yo/", data={'api_token': "ec7efb15-f6e3-4548-91f3-81daf06446b2", 'username': user, 'link': readURL})
                 self.username = None
-            elif self.username != None:
-                self.username = self.username + "0710106541"
 
     def getText(self):
         r = sr.Recognizer()

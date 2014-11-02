@@ -66,30 +66,16 @@ def mainFunction():
     if username == None:
         pass
 
-    elif "0710106541" not in username and reponse != "&":
-        if response = "+&":
+    elif reponse != "&":
+        if response == "+&":
             respo = "Yo"
         else:
             respo = respon
         user = username
-        conversation = str(user) + "said: " + str(qu) + " <br>" + "Bot responded: " + str(respo) + " <br>"
+        conversation = "<p style='color:green; display:inline;'>" + str(user) + "</p>" + "said: " + str(qu) + " <br>" + "<p style='color:blue; display:inline;'>" + "Bot</p> responded: " + str(respo) + " <br>"
         requestURL = "http://www.purduecs.com/write.php?username=" + str(user) + "&conversation=" + str(conversation)
         r = requests.get(requestURL)
-
-    else:
-        if response = "+&":
-            respo = "Yo"
-        elif response = "&":
-            response = "Farewell, comrade!"
-        else:
-            respo = respon
-        user = username.replace("0710106541", "")
-        conversation = str(user) + "said: " + str(qu) + " <br>" + "Bot responded: " + str(respo) + " <br>"
-        requestURL = "http://www.purduecs.com/write.php?username=" + str(user) + "&conversation=" + str(conversation)
-        r = requests.get(requestURL)
-        readURL = "http://www.purduecs.com/read.php?username=" + str(user)
-        requests.post("http://api.justyo.co/yo/", data={'api_token': "ec7efb15-f6e3-4548-91f3-81daf06446b2", 'username': user, 'link': readURL})
-
+        
     return response
 
 response = mainFunction()
