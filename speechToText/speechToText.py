@@ -20,12 +20,12 @@ class speechToText(BasicAnimationClass):
         cx, cy, r = self.cx, self.cy, self.radius
         userString = ""
         self.canvas.delete(ALL)
-        if self.username != None:
+        if self.username != "None":
             username = (self.username).replace("0710106541", "")
         else:
-            username = None
+            username = "None"
         self.canvas.create_text(cx, cy/3, text="OuijaBot", fill="white", font="Arial 30 bold")
-        if username != None:
+        if username != "None":
             userString = "Conversation with " + username
             self.canvas.create_text(cx, self.height - r/2, text=userString, font="Arial 20 bold", fill=outlineColor)
         if self.isRecording:
@@ -51,7 +51,7 @@ class speechToText(BasicAnimationClass):
             self.canvas.create_text(cx, cy, fill=outlineColor, text="Yo", font="Arial 30 bold")
 
     def onTimerFired(self):
-        if self.username == None:
+        if self.username == "None":
             self.checkingForYo = True
             self.redrawAll()
             r = requests.get('http://www.purduecs.com')
@@ -69,7 +69,7 @@ class speechToText(BasicAnimationClass):
             time.sleep(3)
             self.receivedAYo = False
             self.redrawAll()
-    
+
     def onMousePressed(self, event):
         distance = math.sqrt((event.x - self.cx)**2 + (event.y - self.cy)**2)
         if distance <= self.radius:
@@ -83,11 +83,11 @@ class speechToText(BasicAnimationClass):
     def onKeyPressed(self, event):
         keysym = event.keysym
         if keysym == "r" or keysym == "y" or keysym == "o":
-            if self.username != None:
+            if self.username != "None":
                 readURL = "http://www.purduecs.com/read.php?username=" + str(self.username)
                 user = str(self.username)
                 requests.post("http://api.justyo.co/yo/", data={'api_token': "ec7efb15-f6e3-4548-91f3-81daf06446b2", 'username': user, 'link': readURL})
-                self.username = None
+                self.username = "None"
 
     def getText(self):
         r = sr.Recognizer()
@@ -96,32 +96,20 @@ class speechToText(BasicAnimationClass):
             r.energy_threshold = 100
             audio, fuckedUp = r.listen(source, timeout = 1)
             self.isRecording = False
+            print "Stop recording"
             self.redrawAll()
 
             try:
-                try:
-                    if self.username == None:
-                        subprocess.call(["../responseGen/responseGen.py", str(r.recognize(audio, fuckedUp)), self.username])
-                    else:
-                        subprocess.call(["../responseGen/responseGen.py", str(r.recognize(audio, fuckedUp)), self.username])
-                except:
-                    pass
-
+                subprocess.call(["../responseGen/responseGen.py", str(r.recognize(audio, fuckedUp)), self.username])
             except LookupError:
-                try:
-                    if self.username == None:
-                        subprocess.call(["../responseGen/responseGen.py", "-1", self.username])
-                    else:
-                        subprocess.call(["../responseGen/responseGen.py", "-1", self.username])
-                except:
-                    pass
+                subprocess.call(["../responseGen/responseGen.py", "-1", self.username])
 
     def initAnimation(self):
         self.isRecording = False
-        self.app.setTimerDelay(7000) # every seven seconds
+        self.app.setTimerDelay(15000) # every fifteen seconds
         self.checkingForYo = False
         self.receivedAYo = False
-        self.username = None
+        self.username = "None"
 
 stt = speechToText(800, 600)
 

@@ -38,10 +38,10 @@ def mainFunction():
     user = "Yolo!"
 
     if(qu == "-1"):
-        response = "&+"
+        response = "&"
 
     elif(qu == "-2"):
-        response = "+"
+        response = "+&"
 
     else:
         cb1 = cleverbot.Cleverbot()
@@ -63,19 +63,21 @@ def mainFunction():
 
     username = sys.argv[2]
 
-    if username == None:
+    if username == "None":
         pass
 
-    elif reponse != "&":
+    elif response != "&":
         if response == "+&":
             respo = "Yo"
+            que = "Yo"
         else:
             respo = respon
+            que = qu
         user = username
-        conversation = "<p style='color:green; display:inline;'>" + str(user) + "</p>" + "said: " + str(qu) + " <br>" + "<p style='color:blue; display:inline;'>" + "Bot</p> responded: " + str(respo) + " <br>"
+        conversation = "<p style='color:green; display:inline;'>" + str(user) + "</p>" + "said: " + str(que) + " <br>" + "<p style='color:blue; display:inline;'>" + "Bot</p> responded: " + str(respo) + " <br>"
         requestURL = "http://www.purduecs.com/write.php?username=" + str(user) + "&conversation=" + str(conversation)
         r = requests.get(requestURL)
-        
+
     return response
 
 response = mainFunction()
