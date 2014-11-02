@@ -63,7 +63,7 @@ class speechToText(BasicAnimationClass):
             time.sleep(1)
             self.redrawAll()
             try:
-                subprocess.call(["../responseGen/responseGen.py", "-2"])
+                subprocess.call(["../responseGen/responseGen.py", "-2", self.username])
             except:
                 pass
             time.sleep(3)
@@ -101,7 +101,7 @@ class speechToText(BasicAnimationClass):
             try:
                 try:
                     if self.username == None:
-                        subprocess.call(["../responseGen/responseGen.py", str(r.recognize(audio, fuckedUp))])
+                        subprocess.call(["../responseGen/responseGen.py", str(r.recognize(audio, fuckedUp)), self.username])
                     else:
                         subprocess.call(["../responseGen/responseGen.py", str(r.recognize(audio, fuckedUp)), self.username])
                 except:
@@ -110,7 +110,7 @@ class speechToText(BasicAnimationClass):
             except LookupError:
                 try:
                     if self.username == None:
-                        subprocess.call(["../responseGen/responseGen.py", "-1"])
+                        subprocess.call(["../responseGen/responseGen.py", "-1", self.username])
                     else:
                         subprocess.call(["../responseGen/responseGen.py", "-1", self.username])
                 except:
